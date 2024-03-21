@@ -2,12 +2,17 @@ import Input from '@/components/Input';
 import Option from '@/components/Option';
 import TagInput from '@/components/TagInput';
 import TextArea from '@/components/TextArea';
+import StoryDataService from '@/database/services/StoryDataService';
 
-export default function Home() {
+export default async function Home() {
+  const service = new StoryDataService();
+  const data = await service.findFirst();
+
   return (
     <section className="container mx-auto p-10">
       <h1 className="text-2xl font-bold">Update Tags</h1>
       <div className="grid grid-cols-1 gap-5 mt-5">
+        <pre>{JSON.stringify(data, null, 2)}</pre>
         <hr />
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
           <Input className="lg:col-span-2" label="StoryID" id="story-id" name="storyId" />
