@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
-import ChildProcess from 'child_process';
+const ChildProcess = require('child_process');
 
 const nextConfig = {
+  output: 'export',
+  images: { unoptimized: process.env.NODE_ENV === 'development' },
+  basePath: process.env.BASE_PATH || '',
   generateBuildId: async () => {
     // This could be anything, using the latest git hash
     const commitHash = ChildProcess.execSync('git log --pretty=format:"%h" -n1').toString().trim();
@@ -9,4 +12,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
