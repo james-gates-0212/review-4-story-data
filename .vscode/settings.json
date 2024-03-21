@@ -22,5 +22,5 @@
     "editor.formatOnSave": true
   },
   "editor.tabSize": 2,
-  "cSpell.words": ["tailwindcss"]
+  "cSpell.words": ["authorname", "dateupdated", "newkeywords", "storydata", "storyid", "tagsfromauthor", "tailwindcss"]
 }
