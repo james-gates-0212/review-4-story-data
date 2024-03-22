@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 
-export default function (sequelize) {
+export default function model(sequelize) {
   const storydata = sequelize.define(
     'storydata',
     {

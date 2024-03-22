@@ -42,4 +42,6 @@ const TagInput = forwardRef((props: TTagInputProps, ref) => {
   );
 });
 
+TagInput.displayName = 'TagInput';
+
 export default TagInput;

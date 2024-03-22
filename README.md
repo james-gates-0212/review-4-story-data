@@ -2,6 +2,12 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## 🚧Repository Status
+
+[![Auto Assign](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/auto-assign.yml/badge.svg)](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/auto-assign.yml)
+[![Next.js Bundle Analysis](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/nextjs-bundle-analysis.yml/badge.svg)](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/nextjs-bundle-analysis.yml)
+[![Proof HTML](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/proof-html.yml/badge.svg)](https://github.com/james-gates-0212/review-4-story-data/actions/workflows/proof-html.yml)
+
 ## 📝Environment
 
 - node 18.x or later

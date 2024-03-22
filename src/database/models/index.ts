@@ -4,7 +4,6 @@
  */
 import Sequelize from 'sequelize';
 import { getConfig } from '../../config';
-import * as pg from 'pg';
 import storyDataModel from './storydata';
 import { createTunnel } from 'tunnel-ssh';
 
@@ -56,18 +55,22 @@ async function models() {
   };
 
   // Here is where the magic happens...
-  const serverOptions = {};
+  const serverOptions = {
+    host: '127.0.0.1',
+    port: config.DATABASE_PORT,
+  };
 
   // Note that the forwarding options does not define the srcAddr and srcPort here.
   // to use the server configuration.
   const forwardOptions = {
-    srcAddr: '127.0.0.1',
+    srcAddr: config.SSH_SERVER,
     srcPort: config.DATABASE_PORT,
-    dstAddr: '146.190.122.42',
+    dstAddr: config.DATABASE_HOST,
     dstPort: config.DATABASE_PORT,
   };
 
   const useSSHTunnel = (config.USE_SSH_TUNNEL || '').toLowerCase() === 'true';
+  const useSSL = (config.USE_SSL || '').toLowerCase() === 'true';
 
   let [server, conn] = useSSHTunnel ? await createTunnel(tunnelOptions, serverOptions, sshOptions, forwardOptions) : [];
 
@@ -77,14 +80,18 @@ async function models() {
   let sequelize = new (<any>Sequelize)(config.DATABASE_DATABASE, config.DATABASE_USERNAME, config.DATABASE_PASSWORD, {
     host: useSSHTunnel ? '127.0.0.1' : config.DATABASE_HOST,
     port: config.DATABASE_PORT,
-    dialect: config.DATABASE_DIALECT,
-    // dialectOptions: {
-    //   ssl: {
-    //     require: true, // This will help you. But you will see nwe error
-    //     rejectUnauthorized: false, // This line will fix new error
-    //     ca: ca,
-    //   },
-    // },
+    dialect: 'postgres',
+    ...(useSSHTunnel || useSSL
+      ? {
+          dialectOptions: {
+            ssl: {
+              require: true, // This will help you. But you will see nwe error
+              rejectUnauthorized: false, // This line will fix new error
+              ca: ca,
+            },
+          },
+        }
+      : {}),
     logging:
       config.DATABASE_LOGGING === 'true'
         ? (log) =>
