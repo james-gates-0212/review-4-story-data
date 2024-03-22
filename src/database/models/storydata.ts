@@ -9,6 +9,10 @@ export default function model(sequelize) {
         autoIncrement: true,
         primaryKey: true,
       },
+      catid: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       url: {
         type: DataTypes.STRING(1024),
         allowNull: false,

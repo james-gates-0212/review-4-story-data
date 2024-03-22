@@ -39,7 +39,7 @@ export default function Home() {
   const tagLimits: {
     [key: string]: [number, number];
   } = {
-    keywords: [1, 10],
+    keywords: [10, Infinity],
   };
 
   const invalidTagLimit = (tags, limits) => {
@@ -109,14 +109,7 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
           <Input className="lg:col-span-2" label="StoryID" id="storyid" name="storyid" value={data.storyid} readOnly />
           <Input className="lg:col-span-4" label="URL" id="url" name="url" value={data.url} readOnly />
-          <Input
-            className="lg:col-span-6"
-            label="Category"
-            id="category"
-            name="category"
-            value={data.category}
-            readOnly
-          />
+          <Input className="lg:col-span-6" label="Category" id="category" name="category" value={data.catid} readOnly />
         </div>
         <hr />
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
