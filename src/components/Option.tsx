@@ -1,7 +1,9 @@
+import { classNames } from '@/components/Common';
+
 type TOptionProps = {
   className?: string;
   label?: string;
-  value?: string;
+  value?: boolean;
 };
 
 export default function Option(props: TOptionProps) {
@@ -9,7 +11,9 @@ export default function Option(props: TOptionProps) {
   return (
     <div className={className}>
       <label className="block text-sm font-medium leading-6 text-gray-900">{label}</label>
-      <div className="block font-bold">{value}</div>
+      <div className={classNames(['block', 'font-bold', value ? 'text-green-600' : 'text-red-700'])}>
+        {value ? 'Yes' : 'No'}
+      </div>
     </div>
   );
 }
