@@ -4,6 +4,7 @@ import Input from '@/components/Input';
 import Option from '@/components/Option';
 import TagInput from '@/components/TagInput';
 import TextArea from '@/components/TextArea';
+import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 
 const LoadSpin = () => (
@@ -64,7 +65,7 @@ export default function Form() {
   useEffect(() => {
     setLoading(true);
     fetch('/api/first-story', {
-      method: 'GET',
+      method: 'POST',
     })
       .then(async (response) => {
         setData(await response.json());

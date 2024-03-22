@@ -2,7 +2,7 @@ import StoryDataService from '@/database/services/StoryDataService';
 
 export const dynamic = 'force-static';
 
-export async function GET() {
+export async function POST() {
   const service = new StoryDataService();
 
   let result = await service.findFirst();
