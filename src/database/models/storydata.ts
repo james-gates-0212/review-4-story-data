@@ -17,7 +17,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -25,7 +24,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -33,7 +31,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -41,7 +38,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -49,7 +45,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -57,7 +52,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -65,7 +59,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -73,7 +66,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -81,7 +73,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
@@ -89,7 +80,6 @@ export default function model(sequelize) {
         type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
-          notEmpty: true,
           len: [0, 1024],
         },
       },
