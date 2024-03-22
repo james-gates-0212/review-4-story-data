@@ -28,7 +28,6 @@
     "react-dom": "^18",
     "react-tag-input-component": "^2.0.2",
     "sequelize": "^6.37.1",
-    "tunnel-ssh": "^5.1.2",
     "webpack": "^5.0.0"
   },
   "devDependencies": {
