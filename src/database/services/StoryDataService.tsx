@@ -14,12 +14,20 @@ export default class StoryDataService {
       await this.init();
     }
 
+    if (!this.database) {
+      return false;
+    }
+
     return await StoryDataRepository.findFirst({ database: this.database, transaction: undefined });
   }
 
   async updateTags(storyid, data) {
     if (!this.database) {
       await this.init();
+    }
+
+    if (!this.database) {
+      return false;
     }
 
     const transaction = await SequelizeRepository.createTransaction(this.database);
