@@ -67,22 +67,24 @@ async function models() {
     dstPort: config.DATABASE_PORT,
   };
 
-  let [server, conn] = await createTunnel(tunnelOptions, serverOptions, sshOptions, forwardOptions);
+  const useSSHTunnel = (config.USE_SSH_TUNNEL || '').toLowerCase() === 'true';
+
+  let [server, conn] = useSSHTunnel ? await createTunnel(tunnelOptions, serverOptions, sshOptions, forwardOptions) : [];
 
   // Example how to get the server port information.
   console.log('server listen on', server?.address());
 
   let sequelize = new (<any>Sequelize)(config.DATABASE_DATABASE, config.DATABASE_USERNAME, config.DATABASE_PASSWORD, {
-    host: '127.0.0.1',
+    host: useSSHTunnel ? '127.0.0.1' : config.DATABASE_HOST,
     port: config.DATABASE_PORT,
     dialect: config.DATABASE_DIALECT,
-    dialectOptions: {
-      ssl: {
-        require: true, // This will help you. But you will see nwe error
-        rejectUnauthorized: false, // This line will fix new error
-        ca: ca,
-      },
-    },
+    // dialectOptions: {
+    //   ssl: {
+    //     require: true, // This will help you. But you will see nwe error
+    //     rejectUnauthorized: false, // This line will fix new error
+    //     ca: ca,
+    //   },
+    // },
     logging:
       config.DATABASE_LOGGING === 'true'
         ? (log) =>
