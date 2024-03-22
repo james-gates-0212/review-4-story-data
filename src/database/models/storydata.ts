@@ -10,83 +10,83 @@ export default function (sequelize) {
         primaryKey: true,
       },
       url: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       authorname: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       description: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       tagsfromauthor: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       keywords: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       newkeywords: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       locations: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       settings: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       eras: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       title: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(1024),
         allowNull: false,
         validate: {
           notEmpty: true,
-          len: [0, 255],
+          len: [0, 1024],
         },
       },
       option1: {
