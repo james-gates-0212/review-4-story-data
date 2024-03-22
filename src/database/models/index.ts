@@ -2,7 +2,8 @@
  * This module creates the Sequelize to the database and
  * exports all the models.
  */
-const { Sequelize } = require('sequelize');
+import * as pg from 'pg';
+import { Sequelize } from 'sequelize';
 import { getConfig } from '../../config';
 import storyDataModel from './storydata';
 
@@ -23,6 +24,7 @@ async function models() {
     host: config.DATABASE_HOST,
     port: config.DATABASE_PORT,
     dialect: 'postgres',
+    dialectModule: pg,
     dialectOptions: {
       ssl: {
         ssl: true,
