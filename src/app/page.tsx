@@ -36,21 +36,43 @@ export default function Home() {
   const locations = useRef(null);
   const settings = useRef(null);
   const eras = useRef(null);
+  const tagLimits: {
+    [key: string]: [number, number];
+  } = {
+    keywords: [1, 10],
+  };
+
+  const invalidTagLimit = (tags, limits) => {
+    const [min, max] = limits;
+    return tags.length < min || tags.length > max;
+  };
+
+  const validationNames = ['keywords'];
 
   const onSaveTagsAndLoadNextStory = () => {
     setLoading(true);
+    const body = {
+      storyid: data?.storyid,
+      keywords: keywords?.current?.getTags() || [],
+      locations: locations?.current?.getTags() || [],
+      settings: settings?.current?.getTags() || [],
+      eras: eras?.current?.getTags() || [],
+    };
+
+    for (let i = 0; i < validationNames.length; i++) {
+      const name = validationNames[i];
+      if (invalidTagLimit(body[name], tagLimits[name])) {
+        setLoading(false);
+        return;
+      }
+    }
+
     fetch('/api/put-tags', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        storyid: data?.storyid,
-        keywords: keywords?.current?.getTags() || [],
-        locations: locations?.current?.getTags() || [],
-        settings: settings?.current?.getTags() || [],
-        eras: eras?.current?.getTags() || [],
-      }),
+      body: JSON.stringify(body),
     })
       .then(async (response) => {
         setData(await response.json());
@@ -106,7 +128,13 @@ export default function Home() {
             <TagInput label="New Tags" name="newkeywords" value={data.newkeywords} readOnly />
           </div>
           <div className="grid grid-cols-1 gap-5">
-            <TagInput ref={keywords} label="Best 10 Tags" name="keywords" value={data.keywords} />
+            <TagInput
+              ref={keywords}
+              label="Best 10 Tags"
+              name="keywords"
+              value={data.keywords}
+              limits={tagLimits.keywords}
+            />
             <TagInput ref={locations} label="Locations" name="locations" value={data.locations} />
             <TagInput ref={settings} label="Settings" name="settings" value={data.settings} />
             <TagInput ref={eras} label="Eras" name="eras" value={data.eras} />
