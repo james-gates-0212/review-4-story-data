@@ -11,37 +11,14 @@ const dataModels = [storyDataModel];
 
 const highlight = require('cli-highlight').highlight;
 
-const ca =
-  '-----BEGIN CERTIFICATE-----\
-MIIEQTCCAqmgAwIBAgIULQBJVAhuzPymBXcBAbAwYrX4zUEwDQYJKoZIhvcNAQEM\
-BQAwOjE4MDYGA1UEAwwvOWE5NGM5MDItYTQyNC00MTUxLTg3ZDktYzFkZWU4ODBj\
-OTlhIFByb2plY3QgQ0EwHhcNMjQwMzA5MTczMzEzWhcNMzQwMzA3MTczMzEzWjA6\
-MTgwNgYDVQQDDC85YTk0YzkwMi1hNDI0LTQxNTEtODdkOS1jMWRlZTg4MGM5OWEg\
-UHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAKdSGV1q\
-uzwvvIhgWGq8zYlYFX5U5xKiQzFKD/+5YQ6acLkFGHXrXh4n1IrFauZ9Iz42qiGi\
-+WbJyyW1z4NT6ixMiUCKTHGmsYRTmsvmjkTgk1AT9Qaray/ybVdCybeCHbjM7dS7\
-cpewZ1wWrvrT4Pla6r+w5lPpUalpxjgY2odgjaQXwdDP2HXDyPN6114zvjf90sF2\
-vkV3d7ITejzTC5j8PqTuk3LynCXXxqwC7G4eFjbcgIh8o4V92hkqbf6quVRrV85z\
-s5kIdFz1UrhfjCFOKKqjFzt3ZGx2Lkyvg04Eiomm9jzdJSDUVSLtfgynqY9fqlta\
-zhKU9HtLDFa+M5nC/RNlYNHxVuRmxnsMkE+ZjOgMy336fQyTN8YiJyEOZ65uBQS4\
-8quQE9B4qW4bshVNEJYTImBZ/TJilV+0GoABq3DkBRYFUncDsed9dOdamOs/eI1M\
-AhOjFoJQv1DZWxQhgOAnz7QnF2G5YTeTJrxFdHUBBG41tNSpj3OHIL3uuQIDAQAB\
-oz8wPTAdBgNVHQ4EFgQUgD/+EwTxD43zVKHNd1F2G+N5Sm0wDwYDVR0TBAgwBgEB\
-/wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBACRadhI3SRYMGt1J\
-WNOlJEEddYTiyHdg1tGIwBMWcyqhbG3NZolJqb4W20414es7X/+eCBBQT9oZe2Ey\
-6IdgHGsgxhm/r7GBboL13e3qUBQZaXlV8InYEtYmJ+jg2yG++6ZTv2RdlGwM7Awn\
-xW91zMzd70UDJq2iB9Q4DkJlVO/tiZv9R5cBq7d8MCwupwm/+YY+7/jCAuj6xgcU\
-SbSNHyP3ouQgKa5xTTM4aL4CTQySWP+6EDqI876j+ksVrtInUO9FTJwY79TKwveJ\
-eZDoFoez3ThjqqBJZ0LzHmHOjsH+l8YNc4Vhk+OzLhmXf/sRxJN67oI2gR6KMGHA\
-0LTMo8WDvG2uc/IiMQuuq9NLStTZddBZhpTAFvAv4gYR/PX83SWV4W0V0RDzTJR6\
-spQbe+vFZxgVzZZWVIVrLvawfJRu8voC57bnINskT65gJIsNUnvES0ybAIwZZ6oi\
-/m6/NZfKfsYQuiBI1buOwNngVLzrOeSQ12i1FpCtynHf7Vfylg==\
------END CERTIFICATE-----';
-
 async function models() {
   const config = getConfig();
 
   const database = {} as any;
+
+  if (config.DATABASE_HOST === undefined) {
+    return null;
+  }
 
   const tunnelOptions = {
     autoClose: true,
@@ -80,14 +57,14 @@ async function models() {
   let sequelize = new (<any>Sequelize)(config.DATABASE_DATABASE, config.DATABASE_USERNAME, config.DATABASE_PASSWORD, {
     host: useSSHTunnel ? '127.0.0.1' : config.DATABASE_HOST,
     port: config.DATABASE_PORT,
-    dialect: 'postgres',
+    dialect: config.DATABASE_DIALECT,
     ...(useSSHTunnel || useSSL
       ? {
           dialectOptions: {
             ssl: {
               require: true, // This will help you. But you will see nwe error
               rejectUnauthorized: false, // This line will fix new error
-              ca: ca,
+              ca: config.SSL_CERT,
             },
           },
         }
