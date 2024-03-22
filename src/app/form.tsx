@@ -7,10 +7,6 @@ import TextArea from '@/components/TextArea';
 import { useRef, useState } from 'react';
 
 export default function Form(props) {
-  if (!props?.data) {
-    return null;
-  }
-
   const [data, setData] = useState(props.data);
 
   const [loading, setLoading] = useState(false);
@@ -44,6 +40,10 @@ export default function Form(props) {
       })
       .finally(() => setLoading(false));
   };
+
+  if (!props?.data) {
+    return null;
+  }
 
   return (
     <section className="container mx-auto p-10">
