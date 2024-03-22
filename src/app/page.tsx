@@ -75,7 +75,7 @@ export default function Home() {
       body: JSON.stringify(body),
     })
       .then(async (response) => {
-        setData(await response.json());
+        window.location.reload();
       })
       .catch((e) => {
         console.error(e);
