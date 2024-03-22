@@ -3,6 +3,7 @@
 import { classNames } from '@/components/Common';
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import { TagsInput } from 'react-tag-input-component';
+import styles from './TagInput.module.css';
 
 type TTagInputProps = {
   className?: string;
@@ -26,6 +27,8 @@ const TagInput = forwardRef((props: TTagInputProps, ref) => {
     }
     return selected.length < min || selected.length > max;
   };
+
+  const disableRemove = () => selected.length <= min;
 
   const renderLimit = () => {
     if (!limits) {
@@ -61,12 +64,14 @@ const TagInput = forwardRef((props: TTagInputProps, ref) => {
         <span className="inline-block rounded-md shadow-gray-600 shadow-sm bg-gray-300 mb-1 px-2">{renderLimit()}</span>
       </label>
       <TagsInput
-        classNames={{ input: 'flex-grow' }}
+        classNames={{ input: 'flex-grow', tag: disableRemove() ? styles.disableRemove : '' }}
         disabled={readOnly}
         name={name}
         onChange={setSelected}
         placeHolder={placeholder}
         value={selected}
+        disableBackspaceRemove={disableRemove()}
+        isEditOnRemove={false}
       />
     </div>
   );
