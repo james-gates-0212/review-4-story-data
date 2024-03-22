@@ -39,7 +39,7 @@ export default function Home() {
   const tagLimits: {
     [key: string]: [number, number];
   } = {
-    keywords: [10, Infinity],
+    keywords: [10, 10],
   };
 
   const invalidTagLimit = (tags, limits) => {
