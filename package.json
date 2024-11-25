@@ -28,7 +28,7 @@
     "react-dom": "^18",
     "react-tag-input-component": "^2.0.2",
     "sequelize": "^6.37.1",
-    "webpack": "^5.0.0"
+    "webpack": "^5.94.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.3",
